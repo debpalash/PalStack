@@ -1,0 +1,86 @@
+import { Navbar } from "./Navbar.psx";
+import { Footer } from "./Footer.psx";
+
+export default function Reactivity() {
+    _ = this;
+    return (
+        <html lang="en" class="bg-slate-950 text-slate-50 selection:bg-indigo-500/30">
+            <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Server-Side Signals | PalStack Showcase</title>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+                <link rel="stylesheet" href="/assets/styles.css" />
+                <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+                <style>
+                    body {{ font-family: 'Inter', sans-serif; }}
+                    .font-display {{ font-family: 'Outfit', sans-serif; }}
+                    .glass {{ background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }}
+                    .htmx-indicator {{ display: none; opacity: 0; transition: opacity 0.5s ease; }}
+                    .htmx-request .htmx-indicator {{ display: block; opacity: 1; }}
+                    .htmx-request.button {{ opacity: 0.5; pointer-events: none; }}
+                </style>
+            </head>
+            <body class="min-h-screen relative overflow-x-hidden pt-32 pb-12 px-6">
+                <!-- Background decorative elements -->
+                <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+                <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+
+                <Navbar />
+
+                <div class="max-w-4xl mx-auto space-y-12">
+                    <header class="space-y-4">
+                        <a href="/" class="text-xs font-bold uppercase tracking-widest text-indigo-400 hover:text-white transition-colors">&larr; Back to Hub</a>
+                        <h1 class="text-5xl font-display font-extrabold tracking-tight text-white">Native Reactivity</h1>
+                        <p class="text-lg text-slate-400 leading-relaxed max-w-2xl">
+                            Traditional frameworks hydrate Megabytes of JavaScript to manage state. PalStack handles it via <span class="text-indigo-400 font-semibold underline decoration-indigo-400/30 underline-offset-4 text-sm uppercase tracking-widest">Server-Side Signals</span>.
+                        </p>
+                    </header>
+
+                    <div class="glass p-12 rounded-[2.5rem] flex flex-col items-center text-center space-y-8 relative overflow-hidden group shadow-2xl shadow-indigo-500/5">
+                        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/10 via-slate-900/0 to-transparent"></div>
+                        
+                        <div class="space-y-3 z-10">
+                            <h3 class="text-sm font-black uppercase tracking-[0.2em] text-slate-500">Atomic Pointers in Zig Memory</h3>
+                            <div class="text-8xl font-display font-black text-white tracking-tight drop-shadow-2xl">
+                                0
+                            </div>
+                        </div>
+
+                        <div class="space-y-6 z-10 w-full max-w-sm">
+                            <button class="w-full h-16 rounded-2xl bg-white text-slate-950 text-lg font-bold shadow-xl shadow-black/20 hover:bg-slate-200 active:scale-95 transition-all flex items-center justify-center gap-3" hx-post="/api/increment" hx-swap="outerHTML" hx-target="this" hx-indicator="#thinking">
+                                Evaluate Signal
+                            </button>
+                            
+                            <div id="thinking" class="htmx-indicator">
+                                <div class="flex items-center justify-center gap-2 text-indigo-400 font-display font-bold animate-pulse text-sm">
+                                    <div class="h-1.5 w-1.5 rounded-full bg-current"></div>
+                                    Thinking Agent...
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs font-mono text-slate-500 uppercase tracking-widest z-10 pt-4 border-t border-white/5">
+                            HTMX POST /api/increment → Zig Pointer → Re-Render → O(1) Local Patch
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <h4 class="font-display font-bold text-white text-lg underline decoration-indigo-500/20 underline-offset-4">Zero Hydration</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed">The browser receives raw HTML chunks. No V8 JIT overhead, no React fiber trees, no client-side state syncing bugs.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <h4 class="font-display font-bold text-white text-lg underline decoration-blue-500/20 underline-offset-4">Type-Safe State</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed">Signals are native Zig structs. They are checked at compile-time by the PalStack engine for total memory safety.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <Footer />
+            </body>
+        </html>
+    );
+}

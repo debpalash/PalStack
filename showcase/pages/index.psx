@@ -1,0 +1,278 @@
+import { Navbar } from "./Navbar.psx";
+import { Footer } from "./Footer.psx";
+
+export default function Index() {
+    _ = this;
+    return (
+        <html lang="en" class="bg-slate-950 text-slate-50 selection:bg-indigo-500/30">
+            <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>PalStack Hub | Agentic Zig Framework</title>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+                <link rel="stylesheet" href="/assets/styles.css" />
+                <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+                <style>
+                    body {{ font-family: 'Inter', sans-serif; }}
+                    .font-display {{ font-family: 'Outfit', sans-serif; }}
+                    .glass {{ background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }}
+                    @keyframes fade-in {{ from {{ opacity: 0; transform: translateY(10px); }} to {{ opacity: 1; transform: translateY(0); }} }}
+                    .animate-fade-in {{ animation: fade-in 0.5s ease-out forwards; }}
+                    .delay-100 {{ animation-delay: 100ms; opacity: 0; }}
+                    .delay-200 {{ animation-delay: 200ms; opacity: 0; }}
+                    .delay-300 {{ animation-delay: 300ms; opacity: 0; }}
+                    .delay-400 {{ animation-delay: 400ms; opacity: 0; }}
+                    .delay-500 {{ animation-delay: 500ms; opacity: 0; }}
+                </style>
+            </head>
+            <body class="min-h-screen relative overflow-x-hidden pt-32 pb-12 px-6">
+                <!-- Background decorative elements -->
+                <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+                <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+                <div class="fixed top-[30%] right-[20%] w-[20%] h-[20%] rounded-full bg-emerald-500/5 blur-[100px] -z-10 pointer-events-none"></div>
+
+                <Navbar />
+
+                <div class="max-w-5xl mx-auto space-y-24">
+                    <!-- Hero Section -->
+                    <header class="text-center space-y-8 py-12 animate-fade-in">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-black uppercase tracking-widest">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                            </span>
+                            Agentic Fullstack Engine
+                        </div>
+                        <h1 class="text-6xl md:text-8xl font-display font-extrabold tracking-tight text-white leading-tight">
+                            The <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-blue-500 to-emerald-400">Agentic</span> Framework.
+                        </h1>
+                        <p class="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+                            A single Zig binary with built-in ORM, SSR components, reactive signals, and a radix-trie router. Define a struct. Get a database. Ship a server. Zero dependencies.
+                        </p>
+                        <div class="flex flex-wrap justify-center gap-4 pt-4">
+                            <a href="/playground" class="inline-flex h-12 items-center px-8 rounded-xl bg-gradient-to-r from-indigo-500 to-blue-600 text-white font-bold hover:from-indigo-400 hover:to-blue-500 transition-all transform hover:scale-105 active:scale-95 shadow-lg shadow-indigo-500/25">
+                                ⚡ Try Playground
+                            </a>
+                            <a href="/about" class="inline-flex h-12 items-center px-8 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 transition-all">
+                                Read the Docs →
+                            </a>
+                        </div>
+                    </header>
+
+                    <!-- Feature Grid -->
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <a href="/reactivity" class="glass group p-8 rounded-3xl hover:border-indigo-500/40 transition-all hover:translate-y-[-4px] animate-fade-in delay-100">
+                            <div class="h-12 w-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-6 group-hover:bg-indigo-500 group-hover:text-white transition-colors uppercase font-black text-xs">Re</div>
+                            <h3 class="text-xl font-display font-bold text-white mb-2">Native Reactivity</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">Server-Side Signals evaluating memory pointers and surgically patching HTML via HTMX.</p>
+                        </a>
+
+                        <a href="/api_demo" class="glass group p-8 rounded-3xl hover:border-emerald-500/40 transition-all hover:translate-y-[-4px] animate-fade-in delay-200">
+                            <div class="h-12 w-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors uppercase font-black text-xs">Api</div>
+                            <h3 class="text-xl font-display font-bold text-white mb-2">Turbo Router</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">High-performance Radix Trie routing handling raw JSON APIs under ~1ms latencies.</p>
+                        </a>
+
+                        <a href="/static" class="glass group p-8 rounded-3xl hover:border-blue-500/40 transition-all hover:translate-y-[-4px] animate-fade-in delay-300">
+                            <div class="h-12 w-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6 group-hover:bg-blue-500 group-hover:text-white transition-colors uppercase font-black text-xs">Mb</div>
+                            <h3 class="text-xl font-display font-bold text-white mb-2">Memory Vault</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">Serving CSS, images, and HTML directly from binary memory with zero OS I/O overhead.</p>
+                        </a>
+                    </div>
+
+                    <!-- ORM + Playground + CSS Row -->
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="glass p-8 rounded-3xl border-amber-500/20 hover:border-amber-500/40 transition-all animate-fade-in delay-400">
+                            <div class="h-12 w-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-6 uppercase font-black text-xs">Db</div>
+                            <h3 class="text-xl font-display font-bold text-white mb-2">Agentic ORM</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">Define a Zig struct. Tables are created at comptime. INSERT, SELECT, DELETE — all type-safe, zero SQL strings needed.</p>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-slate-900/60 rounded-xl p-4 font-mono text-xs text-emerald-400 border border-white/5">
+                                    <div class="text-slate-500">// models.zig</div>
+                                    <div>pub const User = struct {{</div>
+                                    <div class="pl-4">id: i32,</div>
+                                    <div class="pl-4">email: []const u8,</div>
+                                    <div class="pl-4">handle: []const u8,</div>
+                                    <div class="pl-4">bio: ?[]const u8,</div>
+                                    <div>}};</div>
+                                </div>
+                                <button hx-get="/api/internal/schema" hx-target="#orm-schema" hx-swap="innerHTML" class="w-full py-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold hover:bg-amber-500/20 transition-all">
+                                    Inspect Live SQLite Schema
+                                </button>
+                                <div id="orm-schema" class="text-[10px] font-mono text-slate-500 pt-2 break-all"></div>
+                            </div>
+                        </div>
+
+                        <a href="/playground" class="glass group p-8 rounded-3xl border-purple-500/20 hover:border-purple-500/40 transition-all animate-fade-in delay-500">
+                            <div class="h-12 w-12 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-6 group-hover:bg-purple-500 group-hover:text-white transition-colors uppercase font-black text-xs">Vm</div>
+                            <h3 class="text-xl font-display font-bold text-white mb-2">WASM Playground</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">The entire PalStack engine compiled to WebAssembly. Run Zig + SQLite APIs locally in your browser. No server required.</p>
+                            <div class="flex items-center gap-2 text-purple-400 text-sm font-medium group-hover:text-purple-300 transition-colors">
+                                Open Playground 
+                                <span class="group-hover:translate-x-1 transition-transform">→</span>
+                            </div>
+                        </a>
+
+                        <div class="glass p-8 rounded-3xl border-pink-500/20 hover:border-pink-500/40 transition-all animate-fade-in delay-500">
+                            <div class="h-12 w-12 rounded-2xl bg-pink-500/10 flex items-center justify-center text-pink-400 mb-6 uppercase font-black text-xs">Css</div>
+                            <h3 class="text-xl font-display font-bold text-white mb-2">Type-Safe Styles</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">No 'stringly-typed' class names. Define layout beautifully with native Zig Types. Zero Node.js.</p>
+                            
+                            <div class="bg-slate-900/60 rounded-xl p-4 font-mono text-xs text-pink-400 border border-white/5 space-y-1 overflow-x-auto">
+                                <div><span class="text-slate-500">const</span> style = Style&#123;&#123;</div>
+                                <div class="pl-4">.display = .flex,</div>
+                                <div class="pl-4">.padding = .u6, <span class="text-slate-500">// 1.5rem</span></div>
+                                <div class="pl-4">.background = .slate_900,</div>
+                                <div class="pl-4">.text_color = .emerald_400,</div>
+                                <div>&#125;&#125;;</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Live API Demo -->
+                    <div class="glass p-1 w-full rounded-[2rem] overflow-hidden animate-fade-in delay-300">
+                        <div class="bg-slate-900/40 rounded-[1.8rem] p-12 border border-white/5 flex flex-col md:flex-row items-center gap-12">
+                            <div class="flex-1 space-y-6">
+                                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                                    <div class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                                    Live
+                                </div>
+                                <h2 class="text-3xl font-display font-bold text-white">The Agentic Engine</h2>
+                                <p class="text-slate-400 leading-relaxed">
+                                    PalStack doesn't use Node.js, Webpack, or Vite. It's a single, hermetically-sealed Zig machine with a built-in ORM, Tree-Sitter transpiler, and native HMR server.
+                                </p>
+                                <div class="flex flex-wrap gap-3">
+                                    <button hx-post="/api/users" 
+                                            hx-vals='&#123;"email": "test@palstack.dev", "handle": "tester"&#125;' 
+                                            hx-swap="innerHTML" hx-target="#api-result" 
+                                            class="h-10 px-5 rounded-xl bg-emerald-500 text-white font-bold text-sm hover:bg-emerald-400 transition-colors">
+                                        POST /api/users
+                                    </button>
+                                    <button hx-post="/api/users" 
+                                            hx-vals='&#123;"email": "bad-email", "handle": "tester"&#125;' 
+                                            hx-swap="innerHTML" hx-target="#api-result" 
+                                            class="h-10 px-5 rounded-xl bg-red-500/20 border border-red-500/30 text-red-400 font-bold text-sm hover:bg-red-500/30 transition-colors">
+                                        Test Validation
+                                    </button>
+                                    <button hx-get="/api/users" hx-swap="innerHTML" hx-target="#api-result" class="h-10 px-5 rounded-xl bg-blue-500 text-white font-bold text-sm hover:bg-blue-400 transition-colors">
+                                        GET /api/users
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-96 h-64 rounded-2xl bg-slate-800/80 border border-white/10 p-6 font-mono text-[11px] overflow-hidden shadow-inner flex flex-col">
+                                <div class="text-slate-500 mb-2">API Response:</div>
+                                <div id="api-result" class="text-emerald-400 flex-1 overflow-y-auto break-all">
+                                    Click a button to make a live request →
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Architecture Overview -->
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-8 animate-fade-in">
+                            <h2 class="text-4xl font-display font-extrabold tracking-tight text-white">Zero NodeJS. <br/> <span class="text-indigo-400">Pure Zig Engine.</span></h2>
+                            <p class="text-lg text-slate-400 leading-relaxed">
+                                A total departure from the bloated JavaScript ecosystem. PalStack uses native multi-processing to manage everything you need out of the box.
+                            </p>
+                            <ul class="space-y-6">
+                                <li class="flex items-start gap-4">
+                                    <div class="h-8 w-8 rounded-xl bg-blue-500/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0 text-blue-400 font-black">1</div>
+                                    <div>
+                                        <h4 class="text-white font-bold mb-1">Single-Binary Truth</h4>
+                                        <p class="text-sm text-slate-400 leading-relaxed">Deploy a single robust binary (Mach-O, ELF, or .exe). All front-end assets, CSS, and HTML are pre-baked into memory via comptime `@embedFile`.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <div class="h-8 w-8 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center flex-shrink-0 text-emerald-400 font-black">2</div>
+                                    <div>
+                                        <h4 class="text-white font-bold mb-1">AST Transpilation</h4>
+                                        <p class="text-sm text-slate-400 leading-relaxed">`.psx` files are not interpreted at runtime. A built-in Tree-Sitter converts templates directly into blazing fast Zig source code during development.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <div class="h-8 w-8 rounded-xl bg-orange-500/20 border border-orange-500/30 flex items-center justify-center flex-shrink-0 text-orange-400 font-black">3</div>
+                                    <div>
+                                        <h4 class="text-white font-bold mb-1">Sidecar Ecosystem</h4>
+                                        <p class="text-sm text-slate-400 leading-relaxed">PalStack spawns and orchestrates standalone sub-processes (like native Tailwind CLI) without requiring any local installations of Node.js or `npm` folders.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="glass rounded-[2rem] p-6 flex flex-col justify-center animate-fade-in border-indigo-500/20 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 blur-[80px] -z-10"></div>
+                            <div class="space-y-4">
+                                <!-- Diagram visualization -->
+                                <div class="bg-slate-900/80 rounded-2xl p-4 border border-white/5 flex flex-col gap-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="px-3 py-1 rounded bg-slate-800 text-slate-400 text-[10px] font-mono border border-white/5">index.psx</div>
+                                        <div class="h-px bg-white/10 flex-1 relative"><div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-indigo-500"></div></div>
+                                        <div class="px-3 py-1 rounded bg-indigo-500/20 text-indigo-400 text-[10px] font-mono border border-indigo-500/30 w-32 text-center text-xs">Tree-Sitter AST</div>
+                                    </div>
+                                    <div class="flex justify-end pr-16 text-white/20 text-xl font-black">↓</div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="px-3 py-1 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-mono border border-emerald-500/30">std.http</div>
+                                        <div class="px-3 py-1 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-mono border border-emerald-500/30">+ SQLite</div>
+                                        <div class="px-3 py-1 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-mono border border-emerald-500/30">+ Signals</div>
+                                        <div class="h-px bg-white/10 flex-1 relative"><div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-emerald-500"></div></div>
+                                        <div class="px-3 py-2 rounded-lg bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 w-32 flex justify-center items-center">Single Binary</div>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 bg-slate-950/50 rounded-2xl border border-white/5 space-y-2">
+                                    <div class="flex items-between text-[11px] font-mono">
+                                        <span class="text-slate-500">RAM Footprint</span>
+                                        <span class="text-emerald-400 ml-auto">~5.2 MB</span>
+                                    </div>
+                                    <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
+                                        <div class="bg-emerald-500 h-1.5 rounded-full w-[5%]"></div>
+                                    </div>
+                                    <div class="flex items-between text-[11px] font-mono pt-2">
+                                        <span class="text-slate-500">Router Latency</span>
+                                        <span class="text-indigo-400 ml-auto">&lt; 100 μs</span>
+                                    </div>
+                                    <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
+                                        <div class="bg-indigo-500 h-1.5 rounded-full w-[2%]"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Boot log -->
+                        <div class="bg-slate-900/40 rounded-[1.8rem] p-12 border border-white/5">
+                            <h2 class="text-2xl font-display font-bold text-white mb-6">Boot Sequence</h2>
+                            <div class="bg-slate-950 rounded-xl p-6 font-mono text-[11px] space-y-1 overflow-x-auto border border-white/5">
+                                <div class="text-indigo-400">$ zig build showcase</div>
+                                <div class="text-slate-500">[Transpiler] Compiled index.psx → index.zig</div>
+                                <div class="text-slate-500">[Transpiler] Compiled Navbar.psx → Navbar.zig</div>
+                                <div class="text-slate-500">[Transpiler] Compiled playground.psx → playground.zig</div>
+                                <div class="text-emerald-400">[Agentic ORM] Synchronized schemas for 'posts' and 'users' [SQLite].</div>
+                                <div class="text-slate-300 mt-2">  Routes registered:</div>
+                                <div class="text-slate-300">    Pages: 7    APIs: 7</div>
+                                <div class="text-slate-300 mt-1">  Features demonstrated:</div>
+                                <div class="text-emerald-400">    ✓ Typed application context (AppContext)</div>
+                                <div class="text-emerald-400">    ✓ Radix trie router (turboapi-core derived)</div>
+                                <div class="text-emerald-400">    ✓ Zero-overhead CORS (pre-rendered headers)</div>
+                                <div class="text-emerald-400">    ✓ Reactive signals (Signal, Memo, Effect)</div>
+                                <div class="text-emerald-400">    ✓ Zero-Config Agentic ORM (SQLite + Postgres)</div>
+                                <div class="text-indigo-400 mt-2">  Signal demo: count = 0</div>
+                                <div class="text-indigo-400">  Signal demo: count = 42 (after set)</div>
+                                <div class="text-white mt-2">  ⚡ PalStack v0.1.0</div>
+                                <div class="text-white">  http://127.0.0.1:8080</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <Footer />
+            </body>
+        </html>
+    );
+}
+

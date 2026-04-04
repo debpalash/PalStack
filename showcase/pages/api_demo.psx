@@ -1,0 +1,99 @@
+import { Navbar } from "./Navbar.psx";
+import { Footer } from "./Footer.psx";
+
+export default function ApiDemo() {
+    _ = this;
+    return (
+        <html lang="en" class="bg-slate-950 text-slate-50 selection:bg-orange-500/30">
+            <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Turbo Router | PalStack Showcase</title>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+                <link rel="stylesheet" href="/assets/styles.css" />
+                <style>
+                    body {{ font-family: 'Inter', sans-serif; }}
+                    .font-display {{ font-family: 'Outfit', sans-serif; }}
+                    .glass {{ background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }}
+                </style>
+            </head>
+            <body class="min-h-screen relative overflow-x-hidden pt-32 pb-12 px-6">
+                <!-- Background decorative elements -->
+                <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-orange-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+                <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-red-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+
+                <Navbar />
+
+                <div class="max-w-4xl mx-auto space-y-12">
+                    <header class="space-y-4">
+                        <a href="/" class="text-xs font-bold uppercase tracking-widest text-orange-400 hover:text-white transition-colors">&larr; Back to Hub</a>
+                        <h1 class="text-5xl font-display font-extrabold tracking-tight text-white leading-tight font-display">Turbo HTTP Router</h1>
+                        <p class="text-lg text-slate-400 leading-relaxed max-w-2xl">
+                            Low-latency REST endpoints mapped directly to the App Context using a blazing-fast <span class="text-orange-400 font-semibold uppercase tracking-widest text-xs border border-orange-400/20 px-2 py-0.5 rounded ml-1">Radix Trie</span> engine.
+                        </p>
+                    </header>
+
+                    <div class="glass p-1 w-full rounded-[2.5rem] overflow-hidden">
+                        <div class="bg-slate-900/40 border border-white/5 p-8 rounded-[2.3rem]">
+                            <h3 class="text-xl font-display font-bold text-white mb-6">Registered Native Endpoints</h3>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left font-mono text-xs">
+                                    <thead>
+                                        <tr class="border-b border-white/5 text-slate-500">
+                                            <th class="pb-4 font-black uppercase tracking-widest">Method</th>
+                                            <th class="pb-4 font-black uppercase tracking-widest">Path</th>
+                                            <th class="pb-4 font-black uppercase tracking-widest text-right">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-white/5">
+                                        <tr>
+                                            <td class="py-4 text-emerald-400 font-bold">GET</td>
+                                            <td class="py-4 text-slate-300">/api/health</td>
+                                            <td class="py-4 text-right">
+                                                <a href="/api/health" target="_blank" class="px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">Test &rarr;</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-4 text-emerald-400 font-bold">GET</td>
+                                            <td class="py-4 text-slate-300">/api/users</td>
+                                            <td class="py-4 text-right">
+                                                <a href="/api/users" target="_blank" class="px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">Test &rarr;</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-4 text-orange-400 font-bold">POST</td>
+                                            <td class="py-4 text-slate-300">/api/increment</td>
+                                            <td class="py-4 text-right text-slate-600">Reactive Only</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-4 text-cyan-400 font-bold">GET</td>
+                                            <td class="py-4 text-slate-300">/assets/*path</td>
+                                            <td class="py-4 text-right">
+                                                <a href="/assets/styles.css" target="_blank" class="px-3 py-1 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">Test &rarr;</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="glass p-8 rounded-3xl space-y-4">
+                            <h4 class="font-display font-bold text-white uppercase text-xs tracking-widest text-orange-400">Zero-Overhead Routing</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed">Most frameworks use regex string matching. PalStack uses exact memory address jumps in the Radix Trie for O(log n) lookups.</p>
+                        </div>
+                        <div class="glass p-8 rounded-3xl space-y-4">
+                            <h4 class="font-display font-bold text-white uppercase text-xs tracking-widest text-emerald-400">Memory Efficiency</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed">Dynamic routes like <code class="text-indigo-400">/users/{{id}}</code> are parsed into typed Zig structs instantly. No string splitting required.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <Footer />
+            </body>
+        </html>
+    );
+}

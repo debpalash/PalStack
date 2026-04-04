@@ -1,0 +1,17 @@
+export default function Footer() {
+    _ = this;
+    _ = alloc;
+    return (
+        <footer class="mt-24 pb-12 text-center">
+            <div class="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12"></div>
+            <p class="text-slate-500 text-sm font-medium tracking-tight mb-4">
+                ⚡ Hand-crafted in Zig. Accelerated by PalStack V2.
+            </p>
+            <div class="flex justify-center gap-8 text-xs font-bold uppercase tracking-widest">
+                <a href="https://github.com/palstack" class="text-slate-400 hover:text-white transition-colors">Source</a>
+                <a href="/about" class="text-slate-400 hover:text-white transition-colors">Architecture</a>
+                <a href="/api_demo" class="text-slate-400 hover:text-white transition-colors">API Test</a>
+            </div>
+        </footer>
+    );
+}

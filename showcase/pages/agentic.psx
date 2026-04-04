@@ -1,0 +1,109 @@
+import { Navbar } from "./Navbar.psx";
+import { Footer } from "./Footer.psx";
+
+export default function AgenticScope() {
+    _ = this;
+    return (
+        <html lang="en" class="bg-slate-950 text-slate-50 selection:bg-rose-500/30">
+            <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>AI Agentic Optimization | PalStack</title>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+                <link rel="stylesheet" href="/assets/styles.css" />
+                <style>
+                    body {{ font-family: 'Inter', sans-serif; }}
+                    .font-display {{ font-family: 'Outfit', sans-serif; }}
+                    .glass {{ background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }}
+                    @keyframes slide-in {{
+                        0% {{ transform: translateX(-20px); opacity: 0; }}
+                        100% {{ transform: translateX(0); opacity: 1; }}
+                    }}
+                    .animate-slide-in {{ animation: slide-in 0.5s ease forwards; }}
+                </style>
+            </head>
+            <body class="min-h-screen relative overflow-x-hidden pt-32 pb-12 px-6">
+                <!-- Background decorative elements -->
+                <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-rose-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+                <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-orange-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+
+                <Navbar />
+
+                <div class="max-w-4xl mx-auto space-y-16">
+                    <header class="space-y-6 text-center animate-slide-in">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-black uppercase tracking-widest mx-auto">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                            </span>
+                            Framework Optimization
+                        </div>
+                        <h1 class="text-5xl md:text-6xl font-display font-extrabold tracking-tight text-white leading-tight">
+                            Built for the <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-orange-500">Agentic Era.</span>
+                        </h1>
+                        <p class="text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto">
+                            LLMs and Autonomous Agents are phenomenal at writing logic, but they struggle with cascading complexity, fragile dependencies, and non-deterministic runtimes. 
+                            <br/><strong class="text-white">PalStack eliminates the noise so your Agents can ship safely.</strong>
+                        </p>
+                    </header>
+
+                    <div class="grid gap-8">
+                        <div class="glass p-10 rounded-[3rem] border border-white/5 relative overflow-hidden group">
+                            <div class="absolute right-[-5%] top-[-10%] w-64 h-64 bg-rose-500/5 blur-[60px] rounded-full pointer-events-none"></div>
+                            
+                            <div class="flex flex-col md:flex-row gap-12 items-center">
+                                <div class="flex-1 space-y-4">
+                                    <h3 class="text-3xl font-display font-bold text-white">The Struct is the Source of Truth</h3>
+                                    <p class="text-slate-400 text-sm leading-relaxed">
+                                        In standard stacks, an AI agent must juggle HTML templates, CSS files, Prisma schemas, SQL migrations, and endpoint implementations just to add a simple feature.
+                                    </p>
+                                    <p class="text-slate-400 text-sm leading-relaxed">
+                                        In PalStack, the Agent defines <strong class="text-rose-400">one Zig Struct</strong>. The framework's reflection layer automatically generates the SQLite memory mapping, auto-migrates the database schema, and type-checks the Reactivity bindings instantly. The cognitive load on the LLM is reduced by ~80%.
+                                    </p>
+                                </div>
+                                <div class="w-full md:w-80 bg-slate-900/80 rounded-2xl p-6 font-mono text-[11px] text-emerald-400 border border-white/10 shadow-xl shadow-black/20">
+                                    <div class="text-slate-500 mb-2">// Agent writes this:</div>
+                                    <div><span class="text-pink-400">const</span> Invoice = <span class="text-pink-400">struct</span> &#123;&#123;</div>
+                                    <div class="pl-4">id: i32,</div>
+                                    <div class="pl-4">amount: f64,</div>
+                                    <div class="pl-4">is_paid: bool,</div>
+                                    <div>&#125;&#125;;</div>
+                                    
+                                    <div class="mt-6 pt-4 border-t border-white/10 text-slate-500">
+                                        <div class="text-orange-400 mb-2">// PalStack Engine handles:</div>
+                                        <div class="flex items-center gap-2">✓ <span class="text-slate-400">PRAGMA table_info("invoice")</span></div>
+                                        <div class="flex items-center gap-2">✓ <span class="text-slate-400">ALTER TABLE add columns</span></div>
+                                        <div class="flex items-center gap-2">✓ <span class="text-slate-400">JSON schema validation</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="glass p-8 rounded-3xl border border-white/5 space-y-4 hover:border-orange-500/30 transition-colors">
+                                <div class="h-12 w-12 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-400 mb-6 uppercase font-black text-xs">0 Dp</div>
+                                <h3 class="text-xl font-display font-bold text-white">Self-Healing Infrastructure</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed">
+                                    "Dependency hell" breaks autonomous workflows. If an NPM registry fails or a Webpack version conflicts, an Agent spins in a hallucination loop. PalStack has <strong class="text-white">zero external file dependencies</strong>. No node_modules. It is a strictly controlled, deterministic deployment mechanism.
+                                </p>
+                            </div>
+
+                            <div class="glass p-8 rounded-3xl border border-white/5 space-y-4 hover:border-blue-500/30 transition-colors">
+                                <div class="h-12 w-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6 uppercase font-black text-xs">Cpt</div>
+                                <h3 class="text-xl font-display font-bold text-white">Zero Runtime Hallucinations</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed">
+                                    Loosely typed JavaScript means Agents won't discover logic errors until they run End-to-End tests. PalStack's strict Zig compiler and Typed Radix Router guarantee that if an Agent's generated code compiles, it is <strong class="text-white">mathematically memory-safe</strong> and structurally sound.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <Footer />
+            </body>
+        </html>
+    );
+}
+

@@ -1,0 +1,14 @@
+{
+  "name": "zigstack",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@tailwindcss/cli": "4.0.9",
+    "@types/bun": "latest",
+    "tailwindcss": "4.0.9"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

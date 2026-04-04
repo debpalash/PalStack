@@ -1,0 +1,76 @@
+import { Navbar } from "./Navbar.psx";
+
+export default function Playground() {
+    _ = this;
+    return (
+        <html lang="en" class="bg-slate-950 text-slate-50">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PalStack Hub | Agentic Playground</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+
+</head>
+<body class="bg-slate-950 text-white min-h-screen flex flex-col pt-32 px-6 pb-12 overflow-x-hidden relative">
+    <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+    <Navbar />
+    
+    <div class="max-w-5xl mx-auto w-full space-y-12 relative z-10">
+        <header class="text-center space-y-6 animate-fade-in">
+                <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400">PalStack Agentic WASM Playground</h1>
+                <p class="text-slate-400 mt-2">Running Zig + SQLite API locally in your browser leveraging Edge.js and WebAssembly.</p>
+            </header>
+
+        <main class="flex flex-col md:flex-row gap-6 animate-fade-in delay-200">
+            <!-- Code Editor Panel -->
+            <div class="flex-1 glass rounded-3xl border border-indigo-500/20 p-6 shadow-2xl shadow-indigo-500/10 flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-xl font-display font-bold text-indigo-400">Agentic Schema Definition</h2>
+                    <button id="run-btn" class="px-4 py-1.5 bg-indigo-500 hover:bg-indigo-400 text-white text-sm font-bold rounded-lg shadow-lg shadow-indigo-500/30 transition-all active:scale-95 flex items-center gap-2">
+                        <span>Compile & Sync</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </button>
+                </div>
+                <div class="flex-1 bg-[#0f111a] rounded-xl p-4 border border-indigo-500/10 relative group">
+                    <div class="absolute top-2 right-2 text-xs text-indigo-400/50 font-mono pointer-events-none">models.zig</div>
+                    <textarea id="code-editor" class="w-full h-64 bg-transparent text-[13px] font-mono text-indigo-200 resize-none outline-none focus:ring-0 leading-relaxed spellcheck-false" spellcheck="false" autocomplete="off">
+const std = @import("std");
+
+pub const User = struct {
+    id: i32,
+    email: []const u8,
+    is_active: bool = true,
+};
+
+// Agent automatically infers SQLite schema:
+// CREATE TABLE User (
+//   id INTEGER PRIMARY KEY,
+//   email TEXT NOT NULL,
+//   is_active BOOLEAN
+// );</textarea>
+                </div>
+            </div>
+
+            <!-- Terminal Output Panel -->
+            <div class="flex-1 glass rounded-3xl border border-emerald-500/20 p-6 shadow-2xl shadow-emerald-500/10 flex flex-col">
+                <h2 class="text-xl font-display font-bold mb-4 text-emerald-400">VM Execution Console</h2>
+                <div class="h-full min-h-[16rem] bg-[#050b14] rounded-xl p-5 font-mono text-[13px] text-slate-300 overflow-y-auto shadow-inner border border-black/50 relative" id="console-output">
+                    <div id="logs" class="space-y-1">
+                        <div class="text-indigo-400">> Booting PalStack WASM VM...</div>
+                        <div class="text-emerald-400">> Initializing PGlite Bridge...</div>
+                        <div class="text-slate-500 mt-2">// Playground executes full-stack Zig natively in browser.</div>
+                        <div class="text-slate-500">// Press Compile to test the reactive schema engine.</div>
+                    </div>
+                    <span id="cursor" class="text-rose-400 animate-pulse font-bold mt-1 inline-block">_</span>
+                </div>
+            </div>
+        </main>
+
+        <script src="/assets/playground.js"></script>
+    </div>
+        </body>
+        </html>
+    );
+}

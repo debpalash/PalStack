@@ -1,0 +1,120 @@
+import { Navbar } from "./Navbar.psx";
+import { Footer } from "./Footer.psx";
+
+export default function About() {
+    _ = this;
+    return (
+        <html lang="en" class="bg-slate-950 text-slate-50 selection:bg-cyan-500/30">
+            <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Architecture | PalStack Showcase</title>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+                <link rel="stylesheet" href="/assets/styles.css" />
+                <style>
+                    body {{ font-family: 'Inter', sans-serif; }}
+                    .font-display {{ font-family: 'Outfit', sans-serif; }}
+                    .glass {{ background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }}
+                </style>
+            </head>
+            <body class="min-h-screen relative overflow-x-hidden pt-32 pb-12 px-6">
+                <!-- Background decorative elements -->
+                <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-cyan-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+                <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+
+                <Navbar />
+
+                <div class="max-w-4xl mx-auto space-y-12">
+                    <header class="space-y-4">
+                        <a href="/" class="text-xs font-bold uppercase tracking-widest text-cyan-400 hover:text-white transition-colors">&larr; Back to Hub</a>
+                        <h1 class="text-5xl font-display font-extrabold tracking-tight text-white leading-tight font-display text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-500 underline decoration-cyan-400/20 underline-offset-8 decoration-4">The Modular Engine</h1>
+                        <p class="text-lg text-slate-400 leading-relaxed max-w-2xl">
+                            PalStack is not a monolithic black box. It is composable collection of 5 independent, zero-dependency Zig packages designed for maximum performance.
+                        </p>
+                    </header>
+
+                    <!-- The Modules List -->
+                    <div class="glass p-1 w-full rounded-[3rem] overflow-hidden">
+                        <div class="bg-slate-900/40 rounded-[2.8rem] p-10 border border-white/5 space-y-8">
+                            <h3 class="text-2xl font-display font-bold text-white mb-6">Independent Packages</h3>
+                            
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-slate-950 rounded-2xl p-6 border border-white/5">
+                                    <h4 class="text-indigo-400 font-mono text-sm font-bold mb-2">palstack-core</h4>
+                                    <p class="text-slate-400 text-xs leading-relaxed">The foundation. Contains the native HTTP streams parser, runtime JSON schema validation, and the Type-Safe Style definitions (CSS-in-Zig).</p>
+                                </div>
+                                <div class="bg-slate-950 rounded-2xl p-6 border border-white/5">
+                                    <h4 class="text-emerald-400 font-mono text-sm font-bold mb-2">palstack-server</h4>
+                                    <p class="text-slate-400 text-xs leading-relaxed">The engine room. Features the Turbo Radix Router capable of sub-millisecond dispatching, zero-overhead CORS, and the typed AppContext.</p>
+                                </div>
+                                <div class="bg-slate-950 rounded-2xl p-6 border border-white/5">
+                                    <h4 class="text-amber-400 font-mono text-sm font-bold mb-2">palstack-db</h4>
+                                    <p class="text-slate-400 text-xs leading-relaxed">The Agentic ORM. Reflection-driven SQLite engine that introspects your database and auto-migrates columns based on your Zig structs.</p>
+                                </div>
+                                <div class="bg-slate-950 rounded-2xl p-6 border border-white/5">
+                                    <h4 class="text-orange-400 font-mono text-sm font-bold mb-2">palstack-signals</h4>
+                                    <p class="text-slate-400 text-xs leading-relaxed">Server-Side Reactivity. Provides reactive primitives (Signals, Memos, Effects) that patch raw HTML over WebSocket seamlessly.</p>
+                                </div>
+                                <div class="bg-slate-950 rounded-2xl p-6 border border-white/5 md:col-span-2">
+                                    <h4 class="text-cyan-400 font-mono text-sm font-bold mb-2">palstack-tools</h4>
+                                    <p class="text-slate-400 text-xs leading-relaxed">The orchestration CLI. An intelligent watch server with a built-in Tree-Sitter AST transpiler, transforming `.psx` JSX syntax directly into performant Zig code. Automatically fetches Tailwind Standalone for a zero Node.js experience.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid gap-8">
+                        <div class="glass p-10 rounded-[3rem] space-y-8 relative overflow-hidden group">
+                           <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                           <h3 class="text-3xl font-display font-bold text-white relative z-10 flex items-center gap-4">
+                                <div class="h-10 w-10 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 text-sm">01</div>
+                                The Native Orchestrator
+                           </h3>
+                           <div class="space-y-6 relative z-10 text-slate-400 leading-relaxed text-sm">
+                                <p>PalStack eliminates the Node.js runtime entirely. The <code class="text-cyan-400 font-mono">pal</code> CLI is a multi-threaded Zig binary that manages your entire development lifecycle.</p>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-4">
+                                        <div class="h-6 w-6 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 text-[10px] text-white">✓</div>
+                                        <p><strong class="text-white">Hot-Module Swapping:</strong> Replaces the running process instantly while maintaining native SSE WebSocket connections for 50ms hot-reloads.</p>
+                                    </li>
+                                    <li class="flex items-start gap-4">
+                                        <div class="h-6 w-6 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 text-[10px] text-white">✓</div>
+                                        <p><strong class="text-white">Ghost Tailwind Pipeline:</strong> Spawns a dedicated sidecar process to natively compile CSS v4 without requiring a complicated Webpack/Vite config.</p>
+                                    </li>
+                                </ul>
+                           </div>
+                        </div>
+
+                        <div class="glass p-10 rounded-[3rem] space-y-8 relative overflow-hidden group">
+                           <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                           <h3 class="text-3xl font-display font-bold text-white relative z-10 flex items-center gap-4">
+                                <div class="h-10 w-10 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 text-sm">02</div>
+                                AST Transpilation
+                           </h3>
+                           <div class="space-y-4 relative z-10 text-slate-400 leading-relaxed text-sm">
+                                <p>Every <code class="text-indigo-400 font-mono">.psx</code> file is parsed using the <code class="text-white">Tree-Sitter</code> engine into a high-performance Zig source file.</p>
+                                <p>This results in <strong class="text-white">Zero Runtime Overhead</strong>. There is no template engine parsing strings at request-time. Your HTML is pre-baked into memory buffers ready for <code class="text-white">writer.writeAll()</code> calls.</p>
+                           </div>
+                        </div>
+
+                        <div class="glass p-10 rounded-[3rem] space-y-8 relative overflow-hidden group">
+                           <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                           <h3 class="text-3xl font-display font-bold text-white relative z-10 flex items-center gap-4">
+                                <div class="h-10 w-10 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-sm">03</div>
+                                Single-Binary Truth
+                           </h3>
+                           <div class="space-y-4 relative z-10 text-slate-400 leading-relaxed text-sm">
+                                <p>The ultimate deployment target. All static assets (images, CSS, JS) are embedded into the binary's machine code using Zig's <code class="text-emerald-400 font-mono">@embedFile</code>.</p>
+                                <p>A single binary with absolutely zero dependencies can be dropped on a target machine and it will instantly serve its entire UI from memory. This is the <strong class="text-white">Zero-Config Promise</strong>.</p>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+
+                <Footer />
+            </body>
+        </html>
+    );
+}

@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+    /* Custom theme extensions for PalStack hub */
+    --font-sans: "Inter", system-ui, sans-serif;
+}
+
+/* Custom base layer implementations */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

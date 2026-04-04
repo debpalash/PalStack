@@ -1,0 +1,109 @@
+import { Navbar } from "./Navbar.psx";
+import { Footer } from "./Footer.psx";
+
+export default function StaticAssets() {
+    _ = this;
+    return (
+        <html lang="en" class="bg-slate-950 text-slate-50 selection:bg-indigo-500/30">
+            <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Memory Vault | PalStack Showcase</title>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+                <link rel="stylesheet" href="/assets/styles.css" />
+                <style>
+                    body {{ font-family: 'Inter', sans-serif; }}
+                    .font-display {{ font-family: 'Outfit', sans-serif; }}
+                    .glass {{ background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }}
+                    .vault-bg {{ background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0); background-size: 24px 24px; }}
+                </style>
+            </head>
+            <body class="min-h-screen relative overflow-x-hidden pt-32 pb-12 px-6 vault-bg">
+                <!-- Background decorative elements -->
+                <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+                <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-cyan-500/10 blur-[120px] -z-10 pointer-events-none"></div>
+
+                <Navbar />
+
+                <div class="max-w-4xl mx-auto space-y-12">
+                    <header class="space-y-4">
+                        <a href="/" class="text-xs font-bold uppercase tracking-widest text-emerald-400 hover:text-white transition-colors">&larr; Back to Hub</a>
+                        <h1 class="text-5xl font-display font-extrabold tracking-tight text-white leading-tight">Memory-Mapped Vault</h1>
+                        <p class="text-lg text-slate-400 leading-relaxed max-w-2xl">
+                            Traditional web servers constanty context-switch to the OS to read files. PalStack embeds your public assets directly into the <span class="text-emerald-400 font-semibold font-mono tracking-tighter uppercase text-sm">Executable's .data Segment</span>.
+                        </p>
+                    </header>
+
+                    <div class="grid md:grid-cols-2 gap-8 items-stretch pt-8">
+                        <!-- Visual breakdown -->
+                        <div class="glass p-8 rounded-3xl space-y-8 flex flex-col justify-between shadow-2xl shadow-emerald-500/5">
+                            <div class="space-y-4">
+                                <span class="h-10 w-10 flex items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400 font-bold uppercase text-[10px] tracking-widest">Static</span>
+                                <h3 class="text-2xl font-display font-bold text-white">Zero-Config Embedding</h3>
+                                <p class="text-slate-400 text-sm leading-relaxed">
+                                    Our native Zig transpiler scans your <code class="bg-black/40 px-1.5 py-0.5 rounded text-indigo-300">public/</code> directory and generates architectural proofs to inject every file into the binary. No runtime configuration, ever.
+                                </p>
+                            </div>
+
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3 text-xs font-medium text-slate-300">
+                                    <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                                    O(1) Asset Resolution
+                                </li>
+                                <li class="flex items-center gap-3 text-xs font-medium text-slate-300">
+                                    <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                                    Zero File System Descriptors
+                                </li>
+                                <li class="flex items-center gap-3 text-xs font-medium text-slate-300">
+                                    <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>
+                                    Hermetic Portability
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Live Proof -->
+                        <div class="glass p-8 rounded-3xl flex flex-col items-center justify-center space-y-6 relative overflow-hidden group shadow-2xl shadow-indigo-500/5">
+                            <div class="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-indigo-500/10 to-transparent group-hover:opacity-100 opacity-0 transition-opacity"></div>
+                            
+                            <div class="text-center z-10">
+                                <h4 class="text-sm font-black uppercase tracking-widest text-slate-500 mb-6">Evaluating Native Style Memory</h4>
+                                <div class="bg-slate-900 border border-white/5 rounded-2xl p-6 shadow-2xl w-full max-w-xs space-y-4">
+                                    <div class="h-2 w-24 rounded bg-white/5"></div>
+                                    <div class="h-2 w-full rounded bg-white/5"></div>
+                                    <div class="h-2 w-2/3 rounded bg-white/5"></div>
+                                    <div class="pt-4 flex justify-between items-center border-t border-white/5">
+                                        <div class="text-[10px] font-mono text-emerald-400">@embedFile("styles.css")</div>
+                                        <div class="h-6 w-12 rounded-lg bg-emerald-500/20 text-emerald-400 text-[10px] font-black flex items-center justify-center">200 OK</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <a href="/assets/styles.css" target="_blank" class="z-10 px-6 py-3 rounded-xl bg-slate-800 text-white font-bold hover:bg-slate-700 transition-all border border-white/5 active:scale-95 text-sm">
+                                View raw memory bytes &rarr;
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="glass p-12 rounded-[2.5rem] border-white/5 shadow-2xl">
+                         <div class="flex flex-col md:flex-row gap-12 items-center">
+                            <div class="flex-1 space-y-6">
+                                <h3 class="text-3xl font-display font-black text-white">Dockerless Deployment</h3>
+                                <p class="text-slate-400 leading-relaxed text-sm">
+                                    Stop wrestling with Docker volumes and asset mapping. PalStack compiles your images, scripts, and styles into a single binary. Drop the 15MB executable onto any Linux host and hit the port. It just works.
+                                </p>
+                            </div>
+                            <div class="w-full md:w-auto px-8 py-6 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex flex-col items-center">
+                                <div class="text-3xl font-black text-white mb-1">11.4MB</div>
+                                <div class="text-[10px] font-bold uppercase tracking-widest text-indigo-400">Final Binary Size</div>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+
+                <Footer />
+            </body>
+        </html>
+    );
+}
