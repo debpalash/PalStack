@@ -3,11 +3,7 @@
     .version = "0.1.0",
     .fingerprint = 0x1c0f4afe23b3db9c,
     .minimum_zig_version = "0.14.0",
-    .dependencies = .{
-        .ziex = .{ .path = "../ziex" },
-        .tree_sitter = .{ .path = "../ziex/vendor/zig-tree-sitter" },
-        .tree_sitter_zx = .{ .path = "../ziex/pkg/tree-sitter-zx" },
-    },
+    .dependencies = .{},
     .paths = .{
         "build.zig",
         "build.zig.zon",

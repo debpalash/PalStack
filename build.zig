@@ -45,33 +45,12 @@ pub fn build(b: *std.Build) void {
     db_mod.addIncludePath(b.path("palstack-db/vendor"));
     db_mod.addImport("palstack-core", core_mod);
 
-    // Dependencies
-    const tree_sitter_dep = b.dependency("tree_sitter", .{});
-    const tree_sitter_zx_dep = b.dependency("tree_sitter_zx", .{});
+    // NOTE: PSX transpiler requires ziex/tree-sitter deps.
+    // When those deps are declared in build.zig.zon, re-enable the transpiler block.
+    // For now, the showcase app must use pre-generated routes.zig / assets.zig.
+    const routes_zig_path: ?std.Build.LazyPath = null;
+    const assets_zig_path: ?std.Build.LazyPath = null;
 
-    // ── Tools ───────────────────────────────────────────────────────────
-
-    const transpile_mod = b.createModule(.{
-        .root_source_file = b.path("tools/psx_transpile.zig"),
-        .target = b.resolveTargetQuery(.{}),
-        .optimize = .Debug,
-    });
-    transpile_mod.addImport("tree_sitter", tree_sitter_dep.module("tree_sitter"));
-    transpile_mod.addImport("tree_sitter_zx", tree_sitter_zx_dep.module("tree_sitter_zx"));
-
-    const transpile_exe = b.addExecutable(.{
-        .name = "psx_transpile",
-        .root_module = transpile_mod,
-    });
-    
-    // We run the transpiler which will output a directory of generated zig components AND routes.zig
-    const run_transpile = b.addRunArtifact(transpile_exe);
-    run_transpile.addDirectoryArg(b.path("showcase/pages"));
-    const generated_pages_dir = run_transpile.addOutputDirectoryArg("pages_components");
-    run_transpile.addDirectoryArg(b.path("showcase/public"));
-    
-    const routes_zig_path = generated_pages_dir.path(b, "routes.zig");
-    const assets_zig_path = generated_pages_dir.path(b, "assets.zig");
 
 
     // ── Tests ───────────────────────────────────────────────────────────
@@ -106,61 +85,61 @@ pub fn build(b: *std.Build) void {
     const server_tests = b.addTest(.{ .root_module = server_test_mod });
     test_step.dependOn(&b.addRunArtifact(server_tests).step);
 
-    // ── Example application ─────────────────────────────────────────────
+    // ── Example application (only available when transpiler deps are present) ──
 
-    const showcase_mod = b.createModule(.{
-        .root_source_file = b.path("showcase/main.zig"),
-        .target = target,
-        .optimize = optimize,
-    });
-    showcase_mod.addImport("palstack-core", core_mod);
-    showcase_mod.addImport("palstack-signals", signals_mod);
-    showcase_mod.addImport("palstack-server", server_mod);
-    showcase_mod.addImport("palstack-db", db_mod);
-    
-    // Mount the automatically generated routes.zig file as a module
-    const routes_mod = b.createModule(.{
-        .root_source_file = routes_zig_path,
-        .target = target,
-        .optimize = optimize,
-    });
-    routes_mod.addImport("palstack-signals", signals_mod);
-    
-    const assets_mod = b.createModule(.{
-        .root_source_file = assets_zig_path,
-        .target = target,
-        .optimize = optimize,
-    });
-    
-    showcase_mod.addImport("routes", routes_mod);
-    showcase_mod.addImport("assets", assets_mod);
-
-    const showcase = b.addExecutable(.{
-        .name = "palstack-showcase",
-        .root_module = showcase_mod,
-    });
-    
-    // Conditionally compile C dependencies based on target
-    if (target.query.cpu_arch != .wasm32) {
-        // Native Target: Link standard SQLite C amalgamation
-        showcase.addCSourceFile(.{
-            .file = b.path("palstack-db/vendor/sqlite3.c"),
-            .flags = &[_][]const u8{"-std=c99"},
+    if (routes_zig_path) |r_path| {
+        const showcase_mod = b.createModule(.{
+            .root_source_file = b.path("showcase/main.zig"),
+            .target = target,
+            .optimize = optimize,
         });
-        showcase.addIncludePath(b.path("palstack-db/vendor"));
-        showcase.linkLibC();
+        showcase_mod.addImport("palstack-core", core_mod);
+        showcase_mod.addImport("palstack-signals", signals_mod);
+        showcase_mod.addImport("palstack-server", server_mod);
+        showcase_mod.addImport("palstack-db", db_mod);
+        
+        // Mount the automatically generated routes.zig file as a module
+        const routes_mod = b.createModule(.{
+            .root_source_file = r_path,
+            .target = target,
+            .optimize = optimize,
+        });
+        routes_mod.addImport("palstack-signals", signals_mod);
+        
+        const assets_mod = b.createModule(.{
+            .root_source_file = assets_zig_path.?,
+            .target = target,
+            .optimize = optimize,
+        });
+        
+        showcase_mod.addImport("routes", routes_mod);
+        showcase_mod.addImport("assets", assets_mod);
+
+        const showcase = b.addExecutable(.{
+            .name = "palstack-showcase",
+            .root_module = showcase_mod,
+        });
+        
+        // Conditionally compile C dependencies based on target
+        if (target.query.cpu_arch != .wasm32) {
+            // Native Target: Link standard SQLite C amalgamation
+            showcase_mod.addCSourceFile(.{
+                .file = b.path("palstack-db/vendor/sqlite3.c"),
+                .flags = &[_][]const u8{"-std=c99"},
+            });
+            showcase_mod.addIncludePath(b.path("palstack-db/vendor"));
+            showcase_mod.link_libc = true;
+        }
+        
+        b.installArtifact(showcase);
+
+        const run_showcase = b.addRunArtifact(showcase);
+        run_showcase.step.dependOn(b.getInstallStep());
+        if (b.args) |args| {
+            run_showcase.addArgs(args);
+        }
+
+        const showcase_step = b.step("showcase", "Build and run the showcase app");
+        showcase_step.dependOn(&run_showcase.step);
     }
-    
-    b.installArtifact(showcase);
-
-
-
-    const run_showcase = b.addRunArtifact(showcase);
-    run_showcase.step.dependOn(b.getInstallStep());
-    if (b.args) |args| {
-        run_showcase.addArgs(args);
-    }
-
-    const showcase_step = b.step("showcase", "Build and run the showcase app");
-    showcase_step.dependOn(&run_showcase.step);
 }
