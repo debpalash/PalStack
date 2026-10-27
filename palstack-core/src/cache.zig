@@ -1,4 +1,4 @@
-// ZigStack Response Cache — Bounded, thread-safe response caching.
+// PalStack Response Cache — Bounded, thread-safe response caching.
 //
 // Adapted from TurboAPI's response cache. After the first render/computation,
 // the complete HTTP response bytes are stored. Subsequent requests serve
@@ -34,7 +34,7 @@ pub const ResponseCache = struct {
     alloc: std.mem.Allocator,
     count: usize,
     max_entries: usize,
-    mutex: std.Thread.Mutex,
+    mutex: std.atomic.Mutex,
     enabled: bool,
 
     pub fn init(alloc: std.mem.Allocator, config: CacheConfig) ResponseCache {
@@ -43,7 +43,7 @@ pub const ResponseCache = struct {
             .alloc = alloc,
             .count = 0,
             .max_entries = config.max_entries,
-            .mutex = .{},
+            .mutex = .unlocked,
             .enabled = config.enabled,
         };
     }
@@ -82,7 +82,7 @@ pub const ResponseCache = struct {
             return;
         }
 
-        self.mutex.lock();
+        while (!self.mutex.tryLock()) std.atomic.spinLoopHint();
         defer self.mutex.unlock();
 
         // Bound check — prevent OOM
@@ -138,7 +138,7 @@ pub const ResponseCache = struct {
 
         return std.fmt.allocPrint(self.alloc,
             "HTTP/1.1 {d} {s}\r\n" ++
-                "Server: ZigStack\r\n" ++
+                "Server: PalStack\r\n" ++
                 "Date: {s}\r\n" ++
                 "Content-Type: {s}\r\n" ++
                 "Content-Length: {d}\r\n" ++
@@ -260,6 +260,6 @@ test "render response format" {
     defer alloc.free(rendered.?);
 
     try std.testing.expect(std.mem.indexOf(u8, rendered.?, "HTTP/1.1 200 OK") != null);
-    try std.testing.expect(std.mem.indexOf(u8, rendered.?, "ZigStack") != null);
+    try std.testing.expect(std.mem.indexOf(u8, rendered.?, "PalStack") != null);
     try std.testing.expect(std.mem.indexOf(u8, rendered.?, "{\"ok\":true}") != null);
 }

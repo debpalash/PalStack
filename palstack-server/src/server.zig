@@ -188,12 +188,12 @@ pub fn Server(comptime AppCtx: type) type {
                 return;
             } else {
                 const addr = std.net.Address.parseIp4(self.config.address, self.config.port) catch {
-                    std.debug.print("[ZigStack] Invalid address: {s}:{d}\n", .{ self.config.address, self.config.port });
+                    std.debug.print("[PalStack] Invalid address: {s}:{d}\n", .{ self.config.address, self.config.port });
                     return error.InvalidAddress;
                 };
 
                 var tcp_server = addr.listen(.{ .reuse_address = true }) catch {
-                    std.debug.print("[ZigStack] Failed to bind to {s}:{d}\n", .{ self.config.address, self.config.port });
+                    std.debug.print("[PalStack] Failed to bind to {s}:{d}\n", .{ self.config.address, self.config.port });
                     return error.BindFailed;
                 };
                 defer tcp_server.deinit();

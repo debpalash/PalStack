@@ -1,19 +1,21 @@
-# ⚡ ZigStack
+# ⚡ PalStack
 
 > A next-generation fullstack framework fusing the reactive brilliance of **Solid v2**, the raw HTTP throughput of **TurboAPI**, and the compile-time JSX-to-Zig magic of **Ziex**.
+
+> **Status: experimental.** Targets Zig 0.16. `zig build` works; parts of core, server and db still use pre-0.16 std APIs, so `zig build test` does not pass yet.
 
 ---
 
 ## Architecture
 
-ZigStack is structured as three composable Zig packages:
+PalStack is structured as three composable Zig packages:
 
 ```
-zigstack/
-├── zigstack-core/      # Shared primitives (router, CORS, cache, validator)
-├── zigstack-signals/   # Reactive state (Signal, Memo, Effect, Store)
-├── zigstack-server/    # HTTP server (thread pool, handler dispatch, SSR)
-└── example/            # Demo application
+palstack/
+├── palstack-core/      # Shared primitives (router, CORS, cache, validator)
+├── palstack-signals/   # Reactive state (Signal, Memo, Effect, Store)
+├── palstack-server/    # HTTP server (thread pool, handler dispatch, SSR)
+└── showcase/           # Demo application
 ```
 
 ### What comes from where
@@ -34,7 +36,7 @@ zigstack/
 
 **Why not Solid's fine-grained reactivity in Zig?**
 
-Solid v2 tracks individual signal reads at the DOM binding level — the component function never re-runs. This requires JavaScript Proxies and direct DOM API access, neither of which exist in WASM. Instead, ZigStack adopts Solid's **concept taxonomy** (Signal, Memo, Effect, Store) with Ziex's **execution model** (component-level re-render). Zig's compile-time guarantees eliminate many runtime overhead concerns that make Solid's approach necessary in JS.
+Solid v2 tracks individual signal reads at the DOM binding level — the component function never re-runs. This requires JavaScript Proxies and direct DOM API access, neither of which exist in WASM. Instead, PalStack adopts Solid's **concept taxonomy** (Signal, Memo, Effect, Store) with Ziex's **execution model** (component-level re-render). Zig's compile-time guarantees eliminate many runtime overhead concerns that make Solid's approach necessary in JS.
 
 **Why TurboAPI's router over httpz?**
 
@@ -42,7 +44,7 @@ TurboAPI's radix trie is more optimized: compressed prefix nodes, priority-based
 
 **Why compile-time schema validation?**
 
-TurboAPI parses JSON schema descriptors at runtime (sent from Python). ZigStack uses `comptime` reflection to auto-generate schemas directly from Zig struct types — the type IS the validation spec, with zero runtime cost for schema construction.
+TurboAPI parses JSON schema descriptors at runtime (sent from Python). PalStack uses `comptime` reflection to auto-generate schemas directly from Zig struct types — the type IS the validation spec, with zero runtime cost for schema construction.
 
 ---
 
@@ -50,9 +52,9 @@ TurboAPI parses JSON schema descriptors at runtime (sent from Python). ZigStack 
 
 ```zig
 const std = @import("std");
-const core = @import("zigstack-core");
-const signals = @import("zigstack-signals");
-const zs = @import("zigstack-server");
+const core = @import("palstack-core");
+const signals = @import("palstack-signals");
+const zs = @import("palstack-server");
 
 const App = struct { db: *Database };
 
@@ -81,7 +83,7 @@ pub fn main() !void {
 ## Reactive State
 
 ```zig
-const signals = @import("zigstack-signals");
+const signals = @import("palstack-signals");
 
 // Signal — basic reactive state
 const count = try signals.Signal(i32).create(alloc, "counter", 0, 0);
@@ -99,7 +101,7 @@ user.set(.name, "Bob");  // records patch for SSR streaming
 ## Validated API Routes
 
 ```zig
-const Validator = @import("zigstack-core").Validator;
+const Validator = @import("palstack-core").Validator;
 
 const CreateUser = struct {
     name: []const u8,
@@ -155,4 +157,4 @@ zig build -Dtarget=x86_64-linux -Doptimize=ReleaseFast
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE). Bundles the public-domain SQLite amalgamation in `palstack-db/vendor`.

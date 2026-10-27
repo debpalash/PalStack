@@ -1,4 +1,4 @@
-// ZigStack Signals — Reactive primitives for state management.
+// PalStack Signals — Reactive primitives for state management.
 //
 // Inspired by Solid v2's signal concepts, built on Ziex's State(T) execution model.
 //

@@ -1,4 +1,4 @@
-// ZigStack Signals — Root module.
+// PalStack Signals — Root module.
 
 pub const signals = @import("signals.zig");
 pub const store = @import("store.zig");

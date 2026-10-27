@@ -1,4 +1,4 @@
-// ZigStack Core — Shared foundation library.
+// PalStack Core — Shared foundation library.
 //
 // This module re-exports all core primitives used by the server,
 // the compiler, and the client runtime.

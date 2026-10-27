@@ -1,4 +1,4 @@
-// ZigStack CORS — Zero per-request overhead CORS handler.
+// PalStack CORS — Zero per-request overhead CORS handler.
 //
 // Adapted from TurboAPI's Zig-native CORS implementation.
 // Headers are pre-rendered once at configuration time into a single

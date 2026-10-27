@@ -1,4 +1,4 @@
-// ZigStack Server — Root module.
+// PalStack Server — Root module.
 
 pub const server = @import("server.zig");
 pub const Server = server.Server;

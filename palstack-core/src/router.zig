@@ -1,4 +1,4 @@
-// ZigStack Router — Compressed radix trie with fullstack route metadata.
+// PalStack Router — Compressed radix trie with fullstack route metadata.
 //
 // Adapted from turboapi-core's router with enhancements for fullstack use:
 //   1. Route metadata: page vs API, SSR config, handler classification
@@ -74,7 +74,7 @@ pub const RouteParams = struct {
     }
 };
 
-// ── Route Metadata (ZigStack enhancement) ───────────────────────────────────
+// ── Route Metadata (PalStack enhancement) ───────────────────────────────────
 
 /// Handler classification — determines the lightest dispatch path.
 /// Inspired by TurboAPI's handler types, extended for fullstack.
@@ -298,7 +298,7 @@ pub const Router = struct {
     /// Print all registered routes (TurboAPI-style diagnostics).
     pub fn printRoutes(self: *const Router) void {
         std.debug.print("\n╔══════════════════════════════════════════════╗\n", .{});
-        std.debug.print("║       ZigStack Routes                        ║\n", .{});
+        std.debug.print("║       PalStack Routes                        ║\n", .{});
         std.debug.print("╠══════════════════════════════════════════════╣\n", .{});
         std.debug.print("║  Pages: {d:<5}  APIs: {d:<5}                  ║\n", .{ self.page_count, self.api_count });
         std.debug.print("╚══════════════════════════════════════════════╝\n\n", .{});
@@ -724,7 +724,9 @@ test "route counts" {
 
 // ── Fuzz tests ──────────────────────────────────────────────────────────────
 
-fn fuzz_findRoute(_: void, input: []const u8) anyerror!void {
+fn fuzz_findRoute(_: void, smith: *std.testing.Smith) anyerror!void {
+    var buf: [8192]u8 = undefined;
+    const input = buf[0..smith.slice(&buf)];
     if (input.len == 0) return;
 
     const methods = [_][]const u8{ "GET", "POST", "PUT", "DELETE", "PATCH", "" };

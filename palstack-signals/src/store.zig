@@ -1,4 +1,4 @@
-// ZigStack Store — Deep reactive state with patch tracking.
+// PalStack Store — Deep reactive state with patch tracking.
 //
 // Inspired by Solid v2's createStore/createDeepProxy/createProjection:
 //   - Server: Mutations produce a patch log (PatchOp) for delta streaming
